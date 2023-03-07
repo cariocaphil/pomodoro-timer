@@ -35,6 +35,14 @@ export default function App() {
     setIsRunning(false);
   }
 
+  function stopTimer() {
+    if (intervalRef.current === null) return;
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+    setTitle('Keep it up');
+    setIsRunning(false);
+  }
+
   return (
     <div className="app">
       <h2>{title}</h2>
@@ -47,7 +55,7 @@ export default function App() {
 
       <div className="buttons">
         {!isRunning && <button onClick={startTimer}>Start</button>}
-        {isRunning && <button>Stop</button>}
+        {isRunning && <button onClick={stopTimer}>Stop</button>}
         <button onClick={resetTimer}>Reset</button>
       </div>
     </div>
