@@ -1,23 +1,42 @@
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+function padTime(time) {
+  return time.toString().padStart(2, '0');
+}
+
+export default function App() {
+  const [title, setTitle] = useState('Let the countdown begin!');
+  const [timeLeft, setTimeLeft] = useState(25 * 60);
+
+  function startTimer() {
+    setInterval(() => {
+      setTimeLeft((timeLeft) => {
+        if (timeLeft >= 1) return timeLeft - 1;
+
+        return 0;
+      });
+    }, 1000);
+  }
+
+  const minutes = padTime(Math.floor(timeLeft / 60));
+  const seconds = padTime(timeLeft - minutes * 60);
+
   return (
     <div className="app">
-      <h2>Pomodoro!</h2>
+      <h2>{title}</h2>
 
       <div className="timer">
-        <span>00</span>
+        <span>{minutes}</span>
         <span>:</span>
-        <span>00</span>
+        <span>{seconds}</span>
       </div>
 
       <div className="buttons">
-        <button>Start</button>
+        <button onClick={startTimer}>Start</button>
         <button>Stop</button>
         <button>Reset</button>
       </div>
     </div>
   );
 }
-
-export default App;
