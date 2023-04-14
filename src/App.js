@@ -56,7 +56,7 @@ export default function App() {
       <div className="buttons">
         {!isRunning && <button onClick={startTimer}>Start</button>}
         {isRunning && <button onClick={stopTimer}>Stop</button>}
-        <button onClick={resetTimer}>Reset</button>
+        <button onClick={resetTimer} disabled={timeLeft === (25 * 60)}>Reset</button>
       </div>
     </div>
   );
